@@ -1,9 +1,9 @@
 {
 	"required": true,
-	"package": "com.example.client.mixin",
+	"package": "io.github.mgthorn.bundlescroller.client.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"client": [
-		"ExampleClientMixin"
+		"MixinAbstractContainerScreen"
 	],
 	"injectors": {
 		"defaultRequire": 1

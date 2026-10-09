@@ -1,0 +1,14 @@
+{
+  "bundle-scroller.gui.title.main_menu": "Bundle Scroller - Main Menu",
+  "bundle-scroller.gui.title.configs": "Bundle Scroller - Configs",
+
+  "bundle-scroller.gui.button.change_menu.configuration": "Configuration menu",
+  "bundle-scroller.gui.button.config_gui.all": "All",
+  "bundle-scroller.gui.button.config_gui.generic": "Generic",
+
+  "bundle-scroller.config.generic.name.bundleDrag": "bundleDrag",
+  "bundle-scroller.config.generic.comment.bundleDrag": "With a bundle on the cursor:\n- Hold left-click and drag to put the items of every filled slot into the bundle. Release over an empty slot to put the bundle down there.\n- Hold right-click and drag to put one item from the bundle into every empty slot.",
+
+  "bundle-scroller.config.hotkeys.name.openGuiConfigs": "openGuiConfigs",
+  "bundle-scroller.config.hotkeys.comment.openGuiConfigs": "Open the Bundle Scroller config GUI"
+}
