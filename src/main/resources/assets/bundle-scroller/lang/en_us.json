@@ -23,6 +23,7 @@
   "bundle-scroller.message.pick.put": "Put %s into a bundle",
   "bundle-scroller.message.pick.no_room": "No bundle has room for %s",
   "bundle-scroller.message.pick.cant_put": "%s can't be put into a bundle",
+  "bundle-scroller.message.pick.not_on_list": "%s is not on the pick list. Use putIntoBundle to put it away.",
 
   "bundle-scroller.config.generic.name.bundleDrag": "bundleDrag",
   "bundle-scroller.config.generic.comment.bundleDrag": "With a bundle on the cursor:\n- Hold left-click and drag to put the items of every filled slot into the bundle. Release over an empty slot to put the bundle down there.\n- Hold right-click and drag to put one item from the bundle into every empty slot.",
@@ -32,7 +33,9 @@
   "bundle-scroller.config.generic.name.bundleCrafting": "bundleCrafting",
   "bundle-scroller.config.generic.comment.bundleCrafting": "Item Scroller's crafting (recipe clicks, scroll crafting, craft everything and mass craft) also uses items from bundles.\nMissing ingredients are taken out of bundles into free inventory slots before Item Scroller fills the crafting grid.",
   "bundle-scroller.config.generic.name.autoRestockFromBundle": "autoRestockFromBundle",
-  "bundle-scroller.config.generic.comment.autoRestockFromBundle": "When the stack in your main hand runs out (placing blocks, eating, throwing, dropping), the same item is taken out of a bundle into your hand.\nWorks with any item, not only the ones on the pick list.",
+  "bundle-scroller.config.generic.comment.autoRestockFromBundle": "When the stack in your main hand runs out (placing blocks, eating, throwing), the same item is taken out of a bundle into your hand.\nWorks with any item, not only the ones on the pick list.",
+  "bundle-scroller.config.generic.name.autoRestockAfterDrop": "autoRestockAfterDrop",
+  "bundle-scroller.config.generic.comment.autoRestockAfterDrop": "Also restock the hand from a bundle after dropping its last item with the drop key (Q).\nOnly has an effect when autoRestockFromBundle is on.",
   "bundle-scroller.config.warning.mineman_missing": "Garitone Mineman is not installed, so this option does nothing.",
 
   "bundle-scroller.config.hotkeys.name.openGuiConfigs": "openGuiConfigs",
@@ -40,5 +43,7 @@
   "bundle-scroller.config.hotkeys.name.openGuiPickList": "openGuiPickList",
   "bundle-scroller.config.hotkeys.comment.openGuiPickList": "Open the pick list editor",
   "bundle-scroller.config.hotkeys.name.pickFromBundle": "pickFromBundle",
-  "bundle-scroller.config.hotkeys.comment.pickFromBundle": "Empty main hand: take the next item of the pick list out of a bundle into your hand.\nItem in the main hand: put it into a bundle.\nEach press with an empty hand continues with the next item of the list."
+  "bundle-scroller.config.hotkeys.comment.pickFromBundle": "Empty main hand: take the next item of the pick list out of a bundle into your hand.\nPick list item in the main hand: put it back into a bundle and take the next item out, so each press steps through the list.\nItems that are not on the pick list are left alone (use putIntoBundle).",
+  "bundle-scroller.config.hotkeys.name.putIntoBundle": "putIntoBundle",
+  "bundle-scroller.config.hotkeys.comment.putIntoBundle": "Put the item in your main hand into a bundle (any item, also ones that are not on the pick list).\nWhatever doesn't fit stays in your hand."
 }

@@ -45,5 +45,10 @@ public class InitHandler implements IInitializationHandler {
 			BundlePicker.onPickHotkey();
 			return true;
 		});
+
+		Hotkeys.PUT_INTO_BUNDLE.getKeybind().setCallback((action, key) -> {
+			BundlePicker.onPutHotkey();
+			return true;
+		});
 	}
 }

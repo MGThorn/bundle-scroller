@@ -20,7 +20,8 @@ import io.github.mgthorn.bundlescroller.client.util.BundleUtils;
 /**
  * Autopicking from bundles:
  * - the pick hotkey with an empty main hand takes the next item of the {@link PickList} out of a bundle into the hand,
- *   and with an item in the hand puts that item into a bundle;
+ *   and with a pick list item in the hand swaps it for the next one;
+ * - the put hotkey puts the held item (any item) into a bundle;
  * - auto restock refills the main hand from a bundle when the held stack runs out.
  * Only vanilla actions are used (bundle item selection and inventory clicks), so no server-side mod is needed.
  */
@@ -34,8 +35,14 @@ public class BundlePicker {
 	// Auto restock: the selected slot and its stack at the end of the last tick
 	private static int lastSelectedSlot = -1;
 	private static ItemStack lastHandStack = ItemStack.EMPTY;
+	// Set when the player drops items with the drop key, cleared at the end of each tick
+	private static boolean droppedThisTick;
 
-	/** Pick hotkey: put the held item into a bundle, or take the next pick list item out of one. */
+	/**
+	 * Pick hotkey: take the next pick list item out of a bundle into the empty hand.
+	 * If the hand holds a pick list item, it is put back and the next item comes out, so each press steps through the list.
+	 * Items that are not on the pick list are left alone (the put hotkey puts those away).
+	 */
 	public static void onPickHotkey() {
 		Minecraft mc = Minecraft.getInstance();
 		LocalPlayer player = mc.player;
@@ -47,16 +54,46 @@ public class BundlePicker {
 		Slot handSlot = getHandSlot(player);
 
 		if (handSlot.hasItem()) {
-			putIntoBundle(mc, player, handSlot);
+			Item held = handSlot.getItem().getItem();
+			int listIndex = PickList.getInstance().getItems().indexOf(held);
+
+			if (listIndex == -1) {
+				InfoUtils.printActionbarMessage(MSG + "not_on_list", handSlot.getItem().getHoverName().getString());
+			} else if (putIntoBundle(mc, player, handSlot)) {
+				lastPickIndex = listIndex;
+				pickNext(mc, player, handSlot, held);
+			}
 		} else {
-			pickNext(mc, player, handSlot);
+			pickNext(mc, player, handSlot, null);
 		}
 
 		// The hand changed on purpose, so auto restock must not react to it
 		rememberHand(player);
 	}
 
-	private static void pickNext(Minecraft mc, LocalPlayer player, Slot handSlot) {
+	/** Put hotkey: put the held item into a bundle, without taking anything out. */
+	public static void onPutHotkey() {
+		Minecraft mc = Minecraft.getInstance();
+		LocalPlayer player = mc.player;
+
+		if (player == null || !BundleUtils.canClick(mc, player.inventoryMenu)) {
+			return;
+		}
+
+		Slot handSlot = getHandSlot(player);
+
+		if (handSlot.hasItem()) {
+			putIntoBundle(mc, player, handSlot);
+		}
+
+		// The hand changed on purpose, so auto restock must not react to it
+		rememberHand(player);
+	}
+
+	/**
+	 * @param putBack the item that was just put back, which is skipped; null when the hand was already empty
+	 */
+	private static void pickNext(Minecraft mc, LocalPlayer player, Slot handSlot, @Nullable Item putBack) {
 		List<Item> items = PickList.getInstance().getItems();
 
 		if (items.isEmpty()) {
@@ -70,6 +107,11 @@ public class BundlePicker {
 		for (int step = 1; step <= items.size(); step++) {
 			int index = Math.floorMod(lastPickIndex + step, items.size());
 			Item item = items.get(index);
+
+			if (item == putBack) {
+				continue;
+			}
+
 			BundleHit hit = findInBundles(bundleSlots, stack -> stack.is(item));
 
 			if (hit != null && BundleUtils.takeStackOut(mc, menu, hit.bundleSlot, hit.itemIndex, handSlot)) {
@@ -79,16 +121,20 @@ public class BundlePicker {
 			}
 		}
 
-		InfoUtils.printActionbarMessage(MSG + "nothing_found");
+		// After putting an item back, its "put" message stays
+		if (putBack == null) {
+			InfoUtils.printActionbarMessage(MSG + "nothing_found");
+		}
 	}
 
-	private static void putIntoBundle(Minecraft mc, LocalPlayer player, Slot handSlot) {
+	/** @return true if the hand is empty afterwards */
+	private static boolean putIntoBundle(Minecraft mc, LocalPlayer player, Slot handSlot) {
 		ItemStack held = handSlot.getItem();
 
 		// Bundles in bundles are not supported
 		if (held.has(DataComponents.BUNDLE_CONTENTS) || !BundleContents.canItemBeInBundle(held)) {
 			InfoUtils.printActionbarMessage(MSG + "cant_put", held.getHoverName().getString());
-			return;
+			return false;
 		}
 
 		InventoryMenu menu = player.inventoryMenu;
@@ -126,6 +172,13 @@ public class BundlePicker {
 		} else {
 			InfoUtils.printActionbarMessage(MSG + "put", name);
 		}
+
+		return !handSlot.hasItem();
+	}
+
+	/** Called when the player drops items with the drop key (Q). */
+	public static void onDrop() {
+		droppedThisTick = true;
 	}
 
 	/** Auto restock, every client tick: when the held stack runs out, the same item is taken out of a bundle. */
@@ -135,6 +188,7 @@ public class BundlePicker {
 		if (player == null) {
 			lastSelectedSlot = -1;
 			lastHandStack = ItemStack.EMPTY;
+			droppedThisTick = false;
 			return;
 		}
 
@@ -146,6 +200,7 @@ public class BundlePicker {
 				&& selected == lastSelectedSlot
 				&& !lastHandStack.isEmpty()
 				&& hand.isEmpty()
+				&& (!droppedThisTick || Configs.Generic.AUTO_RESTOCK_AFTER_DROP.getBooleanValue())
 				&& BundleUtils.canClick(mc, player.inventoryMenu)) {
 			ItemStack wanted = lastHandStack;
 			InventoryMenu menu = player.inventoryMenu;
@@ -158,6 +213,7 @@ public class BundlePicker {
 		}
 
 		rememberHand(player);
+		droppedThisTick = false;
 	}
 
 	private static void rememberHand(LocalPlayer player) {

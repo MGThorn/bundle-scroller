@@ -34,12 +34,15 @@ public class Configs {
 
 		// When the held stack runs out, the same item is taken out of a bundle into the hand
 		public static final ConfigBoolean AUTO_RESTOCK_FROM_BUNDLE = new ConfigBoolean("autoRestockFromBundle", false).apply(GENERIC_KEY);
+		// Whether dropping the last item with the drop key also triggers auto restock
+		public static final ConfigBoolean AUTO_RESTOCK_AFTER_DROP = new ConfigBoolean("autoRestockAfterDrop", false).apply(GENERIC_KEY);
 
 		public static final List<IConfigBase> OPTIONS = ImmutableList.of(
 				BUNDLE_DRAG,
 				AUTO_EAT_FROM_BUNDLE,
 				BUNDLE_CRAFTING,
-				AUTO_RESTOCK_FROM_BUNDLE
+				AUTO_RESTOCK_FROM_BUNDLE,
+				AUTO_RESTOCK_AFTER_DROP
 		);
 	}
 }

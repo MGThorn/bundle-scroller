@@ -21,8 +21,9 @@ With a bundle on the cursor:
 - **Pick list:** in the A + C menu, open "Pick list" and click items to add them. The list order is the cycle order.
 - **`pickFromBundle` hotkey** (unbound by default):
   - With an empty main hand, it takes the next pick list item out of a bundle into your hand.
-  - With an item in your hand, it puts that item into a bundle.
-- **`autoRestockFromBundle`** (off by default): when the stack in your hand runs out, the same item is refilled from a bundle.
+  - With a pick list item in your hand, it puts that item back and takes the next one out, so each press steps through the list. Other items are left alone.
+- **`putIntoBundle` hotkey** (unbound by default): puts the item in your hand into a bundle (any item). Whatever doesn't fit stays in your hand.
+- **`autoRestockFromBundle`** (off by default): when the stack in your hand runs out, the same item is refilled from a bundle. `autoRestockAfterDrop` decides whether dropping the last item with Q also refills it.
 
 ### Item Scroller crafting from bundles
 

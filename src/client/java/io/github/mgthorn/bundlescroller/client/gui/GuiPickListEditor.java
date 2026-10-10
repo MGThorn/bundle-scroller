@@ -17,6 +17,7 @@ import fi.dy.masa.malilib.gui.button.ButtonGeneric;
 import fi.dy.masa.malilib.render.GuiContext;
 import fi.dy.masa.malilib.render.InventoryOverlay;
 import fi.dy.masa.malilib.render.RenderUtils;
+import fi.dy.masa.malilib.util.InputUtils;
 import fi.dy.masa.malilib.util.StringUtils;
 import io.github.mgthorn.bundlescroller.Reference;
 import io.github.mgthorn.bundlescroller.client.pick.PickList;
@@ -44,6 +45,7 @@ public class GuiPickListEditor extends GuiBase {
 	private int entryScroll;
 	// The list entry being dragged to a new position, or null
 	@Nullable private Item draggedItem;
+	private int dragScrollTicks;
 
 	public GuiPickListEditor(@Nullable Screen parent) {
 		this.title = StringUtils.translate(Reference.MOD_ID + ".gui.title.pick_list_editor");
@@ -232,6 +234,34 @@ public class GuiPickListEditor extends GuiBase {
 		}
 
 		return false;
+	}
+
+	// While dragging an entry near the top or bottom edge of the list, the list scrolls one row every few ticks
+	@Override
+	public void tick() {
+		super.tick();
+
+		if (this.draggedItem == null || InputUtils.getMouseX() < this.getEntriesX()) {
+			this.dragScrollTicks = 0;
+			return;
+		}
+
+		int mouseY = InputUtils.getMouseY();
+		int bottom = CONTENT_Y + this.getVisibleEntries() * ENTRY_HEIGHT;
+		int delta = mouseY < CONTENT_Y + ENTRY_HEIGHT / 2 ? -1 : mouseY > bottom - ENTRY_HEIGHT / 2 ? 1 : 0;
+
+		if (delta == 0 || ++this.dragScrollTicks < 3) {
+			return;
+		}
+
+		this.dragScrollTicks = 0;
+		int maxScroll = Math.max(0, PickList.getInstance().getItems().size() - this.getVisibleEntries());
+		int newScroll = Math.max(0, Math.min(this.entryScroll + delta, maxScroll));
+
+		if (newScroll != this.entryScroll) {
+			this.entryScroll = newScroll;
+			this.changeList(() -> {});
+		}
 	}
 
 	@Override
