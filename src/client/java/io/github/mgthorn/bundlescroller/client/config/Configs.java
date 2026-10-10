@@ -4,7 +4,10 @@ import java.util.List;
 import com.google.common.collect.ImmutableList;
 import fi.dy.masa.malilib.config.IConfigBase;
 import fi.dy.masa.malilib.config.options.ConfigBoolean;
+import fi.dy.masa.malilib.gui.GuiBase;
+import fi.dy.masa.malilib.util.StringUtils;
 import io.github.mgthorn.bundlescroller.Reference;
+import io.github.mgthorn.bundlescroller.client.compat.MinemanEasyEat;
 
 public class Configs {
 	public static class Generic {
@@ -13,8 +16,22 @@ public class Configs {
 		// Hold a mouse button with a bundle on the cursor and drag over slots to fill or empty it
 		public static final ConfigBoolean BUNDLE_DRAG = new ConfigBoolean("bundleDrag", true).apply(GENERIC_KEY);
 
+		// Garitone Mineman's easy eat takes food out of a bundle when there is none in the inventory.
+		// Without Mineman it does nothing, and the hover text shows a red warning.
+		public static final ConfigBoolean AUTO_EAT_FROM_BUNDLE = new ConfigBoolean("autoEatFromBundle", true) {
+			@Override
+			public String getComment() {
+				if (MinemanEasyEat.isLoaded()) {
+					return super.getComment();
+				}
+
+				return super.getComment() + "\n" + GuiBase.TXT_RED + StringUtils.translate(Reference.MOD_ID + ".config.warning.mineman_missing") + GuiBase.TXT_RST;
+			}
+		}.apply(GENERIC_KEY);
+
 		public static final List<IConfigBase> OPTIONS = ImmutableList.of(
-				BUNDLE_DRAG
+				BUNDLE_DRAG,
+				AUTO_EAT_FROM_BUNDLE
 		);
 	}
 }

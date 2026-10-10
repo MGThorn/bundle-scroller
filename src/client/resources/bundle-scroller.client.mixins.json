@@ -3,7 +3,8 @@
 	"package": "io.github.mgthorn.bundlescroller.client.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"client": [
-		"MixinAbstractContainerScreen"
+		"MixinAbstractContainerScreen",
+		"MixinMinemanEasyEatHandler"
 	],
 	"injectors": {
 		"defaultRequire": 1

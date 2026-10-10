@@ -33,5 +33,8 @@
 		"fabric-api": "*",
 		"malilib": ">=0.27.20",
 		"itemscroller": ">=0.30.8"
+	},
+	"suggests": {
+		"mineman": "*"
 	}
 }

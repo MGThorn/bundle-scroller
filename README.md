@@ -16,10 +16,15 @@ With a bundle on the cursor:
 - Single clicks still work as in vanilla.
 - Every step is a normal vanilla click, so the mod works on servers without anything installed there.
 
+### Auto eat from bundle (needs Garitone Mineman)
+
+When Garitone Mineman's easy eat or auto eat finds no food in your inventory, Bundle Scroller takes food out of a bundle into a free slot, and easy eat eats it. Mineman's `autoEatBlacklist` also applies to the food in bundles. Without Garitone Mineman the `autoEatFromBundle` option does nothing, and its tooltip shows a red warning.
+
 ## Configuration
 
 - **A + C** opens the main menu, which leads to the config screen.
 - `bundleDrag` (Generic) turns bundle dragging on or off.
+- `autoEatFromBundle` (Generic) turns auto eat from bundle on or off.
 - `openGuiConfigs` (Hotkeys) can be bound to open the config screen directly.
 
 The config is saved in `config/bundle-scroller.json`.
@@ -30,6 +35,7 @@ The config is saved in `config/bundle-scroller.json`.
 - Fabric API
 - [MaLiLib](https://github.com/sakura-ryoko/malilib) 0.27.20 or newer
 - [Item Scroller](https://github.com/sakura-ryoko/itemscroller) 0.30.8 or newer
+- Optional: [Garitone Mineman](https://github.com/MGThorn/garitone-mineman), for auto eat from bundle
 
 ## Building
 
