@@ -4,6 +4,8 @@
 	"compatibilityLevel": "JAVA_21",
 	"client": [
 		"MixinAbstractContainerScreen",
+		"MixinItemScrollerInventoryUtils",
+		"MixinItemScrollerKeybindCallbacks",
 		"MixinMinemanEasyEatHandler"
 	],
 	"injectors": {

@@ -11,6 +11,8 @@
 
   "bundle-scroller.config.generic.name.autoEatFromBundle": "autoEatFromBundle",
   "bundle-scroller.config.generic.comment.autoEatFromBundle": "Requires Garitone Mineman.\nWhen its easy eat or auto eat finds no food in the inventory, food is taken out of a bundle into a free slot and eaten.\nIts autoEatBlacklist also applies to the food in bundles.",
+  "bundle-scroller.config.generic.name.bundleCrafting": "bundleCrafting",
+  "bundle-scroller.config.generic.comment.bundleCrafting": "Item Scroller's crafting (recipe clicks, scroll crafting, craft everything and mass craft) also uses items from bundles.\nMissing ingredients are taken out of bundles into free inventory slots before Item Scroller fills the crafting grid.",
   "bundle-scroller.config.warning.mineman_missing": "Garitone Mineman is not installed, so this option does nothing.",
 
   "bundle-scroller.config.hotkeys.name.openGuiConfigs": "openGuiConfigs",

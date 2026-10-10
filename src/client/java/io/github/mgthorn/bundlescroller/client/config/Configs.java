@@ -29,9 +29,13 @@ public class Configs {
 			}
 		}.apply(GENERIC_KEY);
 
+		// Item Scroller's crafting features take missing ingredients out of bundles
+		public static final ConfigBoolean BUNDLE_CRAFTING = new ConfigBoolean("bundleCrafting", true).apply(GENERIC_KEY);
+
 		public static final List<IConfigBase> OPTIONS = ImmutableList.of(
 				BUNDLE_DRAG,
-				AUTO_EAT_FROM_BUNDLE
+				AUTO_EAT_FROM_BUNDLE,
+				BUNDLE_CRAFTING
 		);
 	}
 }
