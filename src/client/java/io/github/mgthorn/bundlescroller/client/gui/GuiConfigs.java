@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.jetbrains.annotations.Nullable;
 import net.minecraft.client.gui.screens.Screen;
+import fi.dy.masa.malilib.gui.GuiBase;
 import fi.dy.masa.malilib.gui.GuiConfigsBase;
 import fi.dy.masa.malilib.gui.button.ButtonGeneric;
 import fi.dy.masa.malilib.util.StringUtils;
@@ -42,6 +43,12 @@ public class GuiConfigs extends GuiConfigsBase {
 		ButtonGeneric button = new ButtonGeneric(x, y, width, 20, label);
 		button.setEnabled(tab != guiTab);
 		this.addButton(button, (btn, mouseButton) -> {
+			// Tabs that open their own screen don't change the config list
+			if (guiTab == ConfigGuiTab.PICK_LIST) {
+				GuiBase.openGui(new GuiPickListEditor(this));
+				return;
+			}
+
 			tab = guiTab;
 			this.clearElements();
 			this.reCreateListWidget();
@@ -60,6 +67,8 @@ public class GuiConfigs extends GuiConfigsBase {
 				configs.addAll(ConfigOptionWrapper.createFor(Configs.Generic.OPTIONS));
 				configs.addAll(ConfigOptionWrapper.createFor(Hotkeys.HOTKEY_LIST));
 			}
+			case PICK_LIST -> {
+			}
 		}
 
 		return configs;
@@ -67,7 +76,8 @@ public class GuiConfigs extends GuiConfigsBase {
 
 	public enum ConfigGuiTab {
 		ALL("all"),
-		GENERIC("generic");
+		GENERIC("generic"),
+		PICK_LIST("pick_list");
 
 		private final String translationKey;
 

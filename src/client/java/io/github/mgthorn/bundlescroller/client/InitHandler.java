@@ -11,6 +11,8 @@ import io.github.mgthorn.bundlescroller.client.config.ConfigHandler;
 import io.github.mgthorn.bundlescroller.client.config.Hotkeys;
 import io.github.mgthorn.bundlescroller.client.gui.GuiConfigs;
 import io.github.mgthorn.bundlescroller.client.gui.GuiMainMenu;
+import io.github.mgthorn.bundlescroller.client.gui.GuiPickListEditor;
+import io.github.mgthorn.bundlescroller.client.pick.BundlePicker;
 
 public class InitHandler implements IInitializationHandler {
 	@Override
@@ -31,6 +33,16 @@ public class InitHandler implements IInitializationHandler {
 
 		Hotkeys.OPEN_GUI_CONFIGS.getKeybind().setCallback((action, key) -> {
 			GuiBase.openGui(new GuiConfigs());
+			return true;
+		});
+
+		Hotkeys.OPEN_GUI_PICK_LIST.getKeybind().setCallback((action, key) -> {
+			GuiBase.openGui(new GuiPickListEditor(null));
+			return true;
+		});
+
+		Hotkeys.PICK_FROM_BUNDLE.getKeybind().setCallback((action, key) -> {
+			BundlePicker.onPickHotkey();
 			return true;
 		});
 	}

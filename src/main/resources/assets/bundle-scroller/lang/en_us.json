@@ -1,10 +1,28 @@
 {
   "bundle-scroller.gui.title.main_menu": "Bundle Scroller - Main Menu",
   "bundle-scroller.gui.title.configs": "Bundle Scroller - Configs",
+  "bundle-scroller.gui.title.pick_list_editor": "Bundle Scroller - Pick List",
 
+  "bundle-scroller.gui.button.change_menu.pick_list": "Pick list",
   "bundle-scroller.gui.button.change_menu.configuration": "Configuration menu",
   "bundle-scroller.gui.button.config_gui.all": "All",
   "bundle-scroller.gui.button.config_gui.generic": "Generic",
+  "bundle-scroller.gui.button.config_gui.pick_list": "Pick list",
+
+  "bundle-scroller.gui.pick_list_editor.done": "Done",
+  "bundle-scroller.gui.pick_list_editor.item_count": "%s items - Left-click: add, Right-click: remove",
+  "bundle-scroller.gui.pick_list_editor.entries_header": "Pick list: %s items (cycle order, drag rows to reorder)",
+  "bundle-scroller.gui.pick_list_editor.empty": "Click items on the left to add them",
+  "bundle-scroller.gui.pick_list_editor.move_up": "Move up",
+  "bundle-scroller.gui.pick_list_editor.move_down": "Move down",
+  "bundle-scroller.gui.pick_list_editor.remove": "Remove from the list",
+
+  "bundle-scroller.message.pick.list_empty": "The pick list is empty. Add items in the A + C menu.",
+  "bundle-scroller.message.pick.picked": "Took %s out of a bundle",
+  "bundle-scroller.message.pick.nothing_found": "No item from the pick list was found in a bundle",
+  "bundle-scroller.message.pick.put": "Put %s into a bundle",
+  "bundle-scroller.message.pick.no_room": "No bundle has room for %s",
+  "bundle-scroller.message.pick.cant_put": "%s can't be put into a bundle",
 
   "bundle-scroller.config.generic.name.bundleDrag": "bundleDrag",
   "bundle-scroller.config.generic.comment.bundleDrag": "With a bundle on the cursor:\n- Hold left-click and drag to put the items of every filled slot into the bundle. Release over an empty slot to put the bundle down there.\n- Hold right-click and drag to put one item from the bundle into every empty slot.",
@@ -13,8 +31,14 @@
   "bundle-scroller.config.generic.comment.autoEatFromBundle": "Requires Garitone Mineman.\nWhen its easy eat or auto eat finds no food in the inventory, food is taken out of a bundle into a free slot and eaten.\nIts autoEatBlacklist also applies to the food in bundles.",
   "bundle-scroller.config.generic.name.bundleCrafting": "bundleCrafting",
   "bundle-scroller.config.generic.comment.bundleCrafting": "Item Scroller's crafting (recipe clicks, scroll crafting, craft everything and mass craft) also uses items from bundles.\nMissing ingredients are taken out of bundles into free inventory slots before Item Scroller fills the crafting grid.",
+  "bundle-scroller.config.generic.name.autoRestockFromBundle": "autoRestockFromBundle",
+  "bundle-scroller.config.generic.comment.autoRestockFromBundle": "When the stack in your main hand runs out (placing blocks, eating, throwing, dropping), the same item is taken out of a bundle into your hand.\nWorks with any item, not only the ones on the pick list.",
   "bundle-scroller.config.warning.mineman_missing": "Garitone Mineman is not installed, so this option does nothing.",
 
   "bundle-scroller.config.hotkeys.name.openGuiConfigs": "openGuiConfigs",
-  "bundle-scroller.config.hotkeys.comment.openGuiConfigs": "Open the Bundle Scroller config GUI"
+  "bundle-scroller.config.hotkeys.comment.openGuiConfigs": "Open the Bundle Scroller config GUI",
+  "bundle-scroller.config.hotkeys.name.openGuiPickList": "openGuiPickList",
+  "bundle-scroller.config.hotkeys.comment.openGuiPickList": "Open the pick list editor",
+  "bundle-scroller.config.hotkeys.name.pickFromBundle": "pickFromBundle",
+  "bundle-scroller.config.hotkeys.comment.pickFromBundle": "Empty main hand: take the next item of the pick list out of a bundle into your hand.\nItem in the main hand: put it into a bundle.\nEach press with an empty hand continues with the next item of the list."
 }

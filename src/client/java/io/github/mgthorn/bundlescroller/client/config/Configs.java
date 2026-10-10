@@ -32,10 +32,14 @@ public class Configs {
 		// Item Scroller's crafting features take missing ingredients out of bundles
 		public static final ConfigBoolean BUNDLE_CRAFTING = new ConfigBoolean("bundleCrafting", true).apply(GENERIC_KEY);
 
+		// When the held stack runs out, the same item is taken out of a bundle into the hand
+		public static final ConfigBoolean AUTO_RESTOCK_FROM_BUNDLE = new ConfigBoolean("autoRestockFromBundle", false).apply(GENERIC_KEY);
+
 		public static final List<IConfigBase> OPTIONS = ImmutableList.of(
 				BUNDLE_DRAG,
 				AUTO_EAT_FROM_BUNDLE,
-				BUNDLE_CRAFTING
+				BUNDLE_CRAFTING,
+				AUTO_RESTOCK_FROM_BUNDLE
 		);
 	}
 }

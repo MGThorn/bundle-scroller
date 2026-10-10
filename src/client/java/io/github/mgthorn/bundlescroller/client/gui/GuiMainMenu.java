@@ -40,6 +40,7 @@ public class GuiMainMenu extends GuiBase {
 	}
 
 	private enum ButtonType {
+		PICK_LIST("pick_list"),
 		CONFIGURATION("configuration");
 
 		private final String translationKey;
@@ -54,6 +55,7 @@ public class GuiMainMenu extends GuiBase {
 
 		void open(GuiMainMenu parent) {
 			switch (this) {
+				case PICK_LIST -> GuiBase.openGui(new GuiPickListEditor(parent));
 				case CONFIGURATION -> GuiBase.openGui(new GuiConfigs(parent));
 			}
 		}

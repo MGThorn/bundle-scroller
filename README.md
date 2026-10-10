@@ -16,6 +16,18 @@ With a bundle on the cursor:
 - Single clicks still work as in vanilla.
 - Every step is a normal vanilla click, so the mod works on servers without anything installed there.
 
+### Picking from bundles
+
+- **Pick list:** in the A + C menu, open "Pick list" and click items to add them. The list order is the cycle order.
+- **`pickFromBundle` hotkey** (unbound by default):
+  - With an empty main hand, it takes the next pick list item out of a bundle into your hand.
+  - With an item in your hand, it puts that item into a bundle.
+- **`autoRestockFromBundle`** (off by default): when the stack in your hand runs out, the same item is refilled from a bundle.
+
+### Item Scroller crafting from bundles
+
+Item Scroller's crafting (recipe clicks, scroll crafting, craft everything and mass craft) takes missing ingredients out of bundles into free slots first (`bundleCrafting`).
+
 ### Auto eat from bundle (needs Garitone Mineman)
 
 When Garitone Mineman's easy eat or auto eat finds no food in your inventory, Bundle Scroller takes food out of a bundle into a free slot, and easy eat eats it. Mineman's `autoEatBlacklist` also applies to the food in bundles. Without Garitone Mineman the `autoEatFromBundle` option does nothing, and its tooltip shows a red warning.

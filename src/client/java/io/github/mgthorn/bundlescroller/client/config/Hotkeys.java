@@ -10,10 +10,14 @@ public class Hotkeys {
 
 	public static final ConfigHotkey OPEN_GUI_MAIN_MENU = new ConfigHotkey("openGuiMainMenu", "A,C").apply(HOTKEYS_KEY);
 	public static final ConfigHotkey OPEN_GUI_CONFIGS   = new ConfigHotkey("openGuiConfigs",  "").apply(HOTKEYS_KEY);
+	public static final ConfigHotkey OPEN_GUI_PICK_LIST = new ConfigHotkey("openGuiPickList", "").apply(HOTKEYS_KEY);
+	public static final ConfigHotkey PICK_FROM_BUNDLE   = new ConfigHotkey("pickFromBundle",  "").apply(HOTKEYS_KEY);
 
 	// Hotkeys shown in the config GUI and saved to the config file
 	public static final List<ConfigHotkey> HOTKEY_LIST = ImmutableList.of(
-			OPEN_GUI_CONFIGS
+			OPEN_GUI_CONFIGS,
+			OPEN_GUI_PICK_LIST,
+			PICK_FROM_BUNDLE
 	);
 
 	// Every hotkey that is active in game, including fixed ones like OPEN_GUI_MAIN_MENU
